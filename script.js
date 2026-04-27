@@ -40,9 +40,7 @@ async function sendMessage() {
     scrollToBottom(chatBox);
 
     // Set the API URL dynamically based on whether you are on localhost or production
-    const API_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" 
-        ? "http://localhost:3001" 
-        : "https://chatbot-tb3s.onrender.com"; 
+    const API_URL = "https://chatbot-tb3s.onrender.com"; 
 
     try {
         const response = await fetch(`${API_URL}/chat`, {
