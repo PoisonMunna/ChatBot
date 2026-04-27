@@ -6,7 +6,9 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 dotenv.config();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: process.env.CORS_ORIGIN || "*"
+}));
 app.use(express.json());
 
 // Gemini setup
@@ -14,7 +16,7 @@ const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Create model
 const model = genAI.getGenerativeModel({
-    model: "gemini-2.5-flash"
+    model: process.env.GEMINI_MODEL || "gemini-2.5-flash"
 });
 
 // Create chat with personality
@@ -60,28 +62,8 @@ app.post("/chat", async (req, res) => {
 });
 
 // Start server
-const ports = [3001];
+const PORT = process.env.PORT || 3001;
 
-function startServer(portIndex = 0) {
-    if (portIndex >= ports.length) {
-        console.error("❌ No available ports!");
-        return;
-    }
-
-    const port = ports[portIndex];
-
-    const server = app.listen(port, () => {
-        console.log(`✅ Server running at http://localhost:${port}`);
-    });
-
-    server.on("error", (err) => {
-        if (err.code === "EADDRINUSE") {
-            console.log(`⚠️ Port ${port} busy, trying next...`);
-            startServer(portIndex + 1);
-        } else {
-            console.error("❌ Server error:", err);
-        }
-    });
-}
-
-startServer();
+app.listen(PORT, () => {
+    console.log(`✅ Server running on port ${PORT}`);
+});
