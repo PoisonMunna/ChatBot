@@ -10,6 +10,7 @@ app.use(cors({
     origin: process.env.CORS_ORIGIN || "*"
 }));
 app.use(express.json());
+app.use(express.static('public'));
 
 // Gemini setup
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
