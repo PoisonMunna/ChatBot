@@ -1,4 +1,4 @@
-# Full-Stack AI Chatbot Assistant
+# Full-Stack AI Chatbot Assistant 
 
 A premium, highly interactive Artificial Intelligence Chatbot built using Vanilla Web Technologies (HTML/CSS/JS) for the frontend and Node.js/Express for the backend. The bot is powered by the Google Generative AI SDK, utilizing the `gemini-2.5-flash` language model to respond to prompts quickly and conversationally.
 
